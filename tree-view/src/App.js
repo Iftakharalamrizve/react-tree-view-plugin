@@ -1,4 +1,4 @@
-
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Tree from './components/Tree';
@@ -7,6 +7,10 @@ import { AppContext } from './contex/contextApi';
 
 function App() {
   //Create a HTML element specified by parameter 'p_type'
+  useEffect(() => {
+    readyTreeView()
+  });
+
   function createSimpleElement(p_type, p_id, p_class) {
     let element = document.createElement(p_type);
     if (p_id != undefined) element.id = p_id;
@@ -505,11 +509,128 @@ function App() {
 
     return tree;
   }
+
+  function readyTreeView(){
+    //Tree Context Menu Structure
+    var contex_menu = {
+      'context1' : {
+        elements : [
+          {
+            text : 'Node Actions',
+            icon: 'images/blue_key.png',
+            action : function(node) {
+
+            },
+            submenu: {
+              elements : [
+                {
+                  text : 'Toggle Node',
+                  icon: 'images/leaf.png',
+                  action : function(node) {
+                    node.toggleNode();
+                  }
+                },
+                {
+                  text : 'Expand Node',
+                  icon: 'images/leaf.png',
+                  action : function(node) {
+                    node.expandNode();
+                  }
+                },
+                {
+                  text : 'Collapse Node',
+                  icon: 'images/leaf.png',
+                  action : function(node) {
+                    node.collapseNode();
+                  }
+                },
+                {
+                  text : 'Expand Subtree',
+                  icon: 'images/tree.png',
+                  action : function(node) {
+                    node.expandSubtree();
+                  }
+                },
+                {
+                  text : 'Collapse Subtree',
+                  icon: 'images/tree.png',
+                  action : function(node) {
+                    node.collapseSubtree();
+                  }
+                },
+                {
+                  text : 'Delete Node',
+                  icon: 'images/delete.png',
+                  action : function(node) {
+                    node.removeNode();
+                  }
+                },
+              ]
+            }
+          },
+          {
+            text : 'Child Actions',
+            icon: 'images/blue_key.png',
+            action : function(node) {
+
+            },
+            submenu: {
+              elements : [
+                {
+                  text : 'Create Child Node',
+                  icon: 'images/add1.png',
+                  action : function(node) {
+                    node.createChildNode('Created',false,'images/folder.png',null,'context1');
+                  }
+                },
+                {
+                  text : 'Create 1000 Child Nodes',
+                  icon: 'images/add1.png',
+                  action : function(node) {
+                    for (var i=0; i<1000; i++)
+                      node.createChildNode('Created -' + i,false,'images/folder.png',null,'context1');
+                  }
+                },
+                {
+                  text : 'Delete Child Nodes',
+                  icon: 'images/delete.png',
+                  action : function(node) {
+                    node.removeChildNodes();
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    };
+    let tree = createTree('div_tree','white',contex_menu);
+    for (var i=1; i<10; i++) {
+      let node1 = tree.createNode('Level 0 - Node ' + i,false,'images/star.png',null,null,'context1');
+      for (var j=1; j<5; j++) {
+        let node2 = node1.createChildNode('Level 1 - Node ' + j, false, 'images/blue_key.png',null,'context1');
+        for (var k=1; k<5; k++) {
+          let node3 = node2.createChildNode('Level 2 - Node ' + k, false, 'images/monitor.png',null,'context1');
+          /*for (var l=1; l<5; l++) {
+            node4 = node3.createChildNode('Level 3 - Node ' + l, false, 'images/key_green.png',null,'context1');
+            for (var m=1; m<5; m++) {
+              node4.createChildNode('Level 4 - Node ' + m, false, 'images/file.png',null,'context1');
+            }
+          }*/
+        }
+      }
+    }
+    tree.drawTree();
+  }
+
   return (
     <div>
-      <AppContext.Provider value={{ createTree:createTree() }}>
+
+      {/* <AppContext.Provider value={{ createTree:createTree() }}>
+          <div id="div_tree"></div>
           <Tree tree={data} />
-      </AppContext.Provider>
+      </AppContext.Provider> */}
+      <div id="div_tree"></div>
     </div>
   );
 }
