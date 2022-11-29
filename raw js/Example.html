@@ -1,0 +1,139 @@
+<html>
+	<head>
+		<title>aimaraJS Simple Example</title>
+		<link rel="stylesheet" type="text/css" href="css/Aimara.css">
+		<link rel="stylesheet" type="text/css" href="css/Example.css">
+		<script src="lib/Aimara.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+
+				//Initializing Tree
+
+				//Tree Context Menu Structure
+				var contex_menu = {
+					'context1' : {
+						elements : [
+							{
+								text : 'Node Actions',
+								icon: 'images/blue_key.png',
+								action : function(node) {
+
+								},
+								submenu: {
+									elements : [
+										{
+											text : 'Toggle Node',
+											icon: 'images/leaf.png',
+											action : function(node) {
+												node.toggleNode();
+											}
+										},
+										{
+											text : 'Expand Node',
+											icon: 'images/leaf.png',
+											action : function(node) {
+												node.expandNode();
+											}
+										},
+										{
+											text : 'Collapse Node',
+											icon: 'images/leaf.png',
+											action : function(node) {
+												node.collapseNode();
+											}
+										},
+										{
+											text : 'Expand Subtree',
+											icon: 'images/tree.png',
+											action : function(node) {
+												node.expandSubtree();
+											}
+										},
+										{
+											text : 'Collapse Subtree',
+											icon: 'images/tree.png',
+											action : function(node) {
+												node.collapseSubtree();
+											}
+										},
+										{
+											text : 'Delete Node',
+											icon: 'images/delete.png',
+											action : function(node) {
+												node.removeNode();
+											}
+										},
+									]
+								}
+							},
+							{
+								text : 'Child Actions',
+								icon: 'images/blue_key.png',
+								action : function(node) {
+
+								},
+								submenu: {
+									elements : [
+										{
+											text : 'Create Child Node',
+											icon: 'images/add1.png',
+											action : function(node) {
+												node.createChildNode('Created',false,'images/folder.png',null,'context1');
+											}
+										},
+										{
+											text : 'Create 1000 Child Nodes',
+											icon: 'images/add1.png',
+											action : function(node) {
+												for (var i=0; i<1000; i++)
+													node.createChildNode('Created -' + i,false,'images/folder.png',null,'context1');
+											}
+										},
+										{
+											text : 'Delete Child Nodes',
+											icon: 'images/delete.png',
+											action : function(node) {
+												node.removeChildNodes();
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				};
+
+				//Creating the tree
+				tree = createTree('div_tree','white',contex_menu);
+				console.log(tree)
+
+				
+
+
+			};
+
+			function expand_all() {
+				tree.expandTree();
+			}
+
+			function clear_log() {
+				document.getElementById('div_log').innerHTML = '';
+			}
+
+			function collapse_all() {
+				tree.collapseTree();
+			}
+		</script>
+	</head>
+	<body>
+		<img src="images/aimarajs2.png"/>
+		<h2>Pure Javascript Tree Component</h2>
+		<button onclick="expand_all()">Expand All Nodes</button>
+		<button onclick="collapse_all()">Collapse All Nodes</button>
+		<button onclick="clear_log()">Clear Log</button>
+		<br/><br/>
+		<div id="div_log"></div>
+		<div id="div_tree"></div>
+
+	</body>
+</html>
