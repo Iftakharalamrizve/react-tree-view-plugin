@@ -194,3 +194,10 @@ span.node_selected a {
   top: 0;
   left: 100%;
 }
+
+.commmon-visable{
+	visibility: hidden;
+}
+.commmon-showable{
+	visibility: visible;
+}

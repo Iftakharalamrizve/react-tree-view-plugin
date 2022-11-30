@@ -1,7 +1,7 @@
 import TreeNode from "./TreeNode"
 function Tree({ treeData }) {
     return (
-        <ul id="tree" class="tree" >
+        <ul id="tree" className="tree" >
             {treeData.map((node) => (
                 <TreeNode node={node} key={node.key} />
             ))}
