@@ -21,7 +21,7 @@ body {
 }
 ul.tree, ul.tree ul {
 	list-style-type: none;
-	background: url(vline.png) repeat-y;
+	background: url(./vline.png) repeat-y;
 	margin: 0;
 	padding: 0;
 	padding-left: 7px;
@@ -44,11 +44,11 @@ ul.tree li {
 	margin: 0;
 	padding: 0 12px;
 	line-height: 22px;
-	background: url(node.png) no-repeat;
+	background: url(./node.png) no-repeat;
 }
 
 ul.tree li.last {
-	background: #fff url(lastnode.png) no-repeat;
+	background: #fff url(./lastnode.png) no-repeat;
 }
 
 img.exp_col {

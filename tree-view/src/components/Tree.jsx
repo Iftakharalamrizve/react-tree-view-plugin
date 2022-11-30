@@ -1,15 +1,10 @@
-import React, { useContext } from 'react';
-import List from './List';
-import { AppContext } from '../contex/contextApi';
-
-
-function Tree(props) {
-    const { createTree } = useContext(AppContext);
-    const { tree } = props;
-    console.log(createTree)
+import TreeNode from "./TreeNode"
+function Tree({ treeData }) {
     return (
-        <ul>
-            <List id={tree.id} label={tree.label} items={tree.items} />
+        <ul id="tree" class="tree" >
+            {treeData.map((node) => (
+                <TreeNode node={node} key={node.key} />
+            ))}
         </ul>
     )
 }
