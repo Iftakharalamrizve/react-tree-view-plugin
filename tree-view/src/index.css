@@ -187,7 +187,7 @@ span.node_selected a {
   display: none;
   position: absolute;
   min-width: 150px;
-	box-shadow: 2px 2px 3px #BDBDBD;
+  box-shadow: 2px 2px 3px #BDBDBD;
 }
 
 .menu .sub-menu {
