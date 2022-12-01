@@ -1,27 +1,43 @@
-import React,{useState} from 'react'
-import Tree from './Tree';
+import React, { useState } from "react";
+import Tree from "./Tree";
 
-function TreeNode({ node }) {
-    const { children, label } = node;
-    console.log(children,label)
-    const [showChildren, setShowChildren] = useState(false);
-    const handleClick = () => {
-        setShowChildren(!showChildren);
-    };
-    const leafNodeClick = () => {
+function TreeNode({ node, lastNode }) {
+  const { children, label } = node;
+  const [showChildren, setShowChildren] = useState(false);
+  const handleClick = () => {
+    setShowChildren(!showChildren);
+  };
+  return (
+    <>
+      <li
+        className={lastNode ? "last" : ""}
+        onClick={children ? handleClick : null}
+      >
+        <img
+          alt=""
+          id={showChildren ? "toggle_off" : "toggle_on"}
+          className={
+            children ? "exp_col commmon-showable" : "exp_col commmon-visable"
+          }
+          src={showChildren ? "./images/collapse.png" : "./images/expand.png"}
+        />
+        <span className="node">
+          <img
+            alt=""
+            className="icon_tree"
+            src={children ? "./images/folder.png" : "./images/file.png"}
+          />
+          <span>{label}</span>
+        </span>
+      </li>
 
-    }
-    return (
-        <>
-            <li onClick={children?handleClick:leafNodeClick}>
-                {showChildren?<img alt='' id="toggle_off" className={children?'exp_col commmon-showable':'exp_col commmon-visable'} src="./images/collapse.png"  />:<img alt='' id="toggle_on" className={children?'exp_col commmon-showable':'exp_col commmon-visable'} src="./images/expand.png" />}
-                <span className="node"><img alt='' className="icon_tree" src="./images/star.png" />
-                    <a>{label}</a>
-                </span>
-            </li>
-            {showChildren && <li > <Tree treeData={children} /> </li>}
-        </>
-    )
+      {showChildren && (
+        <li>
+          <Tree treeData={children} nodeLength={children.length - 1} />
+        </li>
+      )}
+    </>
+  );
 }
 
-export default TreeNode
+export default TreeNode;

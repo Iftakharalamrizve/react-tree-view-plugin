@@ -1,9 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 import Tree from './components/Tree';
-import data from './data/data.json';
-import { AppContext } from './contex/contextApi';
 
 function App() {
   //Create a HTML element specified by parameter 'p_type'
@@ -669,17 +665,12 @@ function App() {
     },
     {
       key: "2",
-      label: "Downloads",
-      children: [],
+      label: "Downloads"
     },
   ];
   return (
-    <div>
-       
-
-		    <div id="div_tree">
-            <Tree treeData={treeData} />
-        </div>
+    <div id="div_tree">
+        <Tree treeData={treeData} nodeLength={treeData.length -1} />
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import TreeNode from "./TreeNode"
-function Tree({ treeData }) {
+function Tree({ treeData, nodeLength }) {
     return (
         <ul id="tree" className="tree" >
-            {treeData.map((node) => (
-                <TreeNode node={node} key={node.key} />
+            {treeData.map((node,index) => (
+                <TreeNode node={node} key={node.key} lastNode={index == nodeLength ? true : false} />
             ))}
         </ul>
     )
