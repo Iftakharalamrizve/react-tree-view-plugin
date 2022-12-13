@@ -1,3 +1,3 @@
-import MyCounter from './components/App'
+import ReactTreeView from './components/App'
 
-export { MyCounter }
+export { ReactTreeView }
